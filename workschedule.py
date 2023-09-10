@@ -1,4 +1,4 @@
-7# main
+# main
 def get_work_status(month: int, day: int) -> str:
     n = convert_date_to_n(month, day)
     
