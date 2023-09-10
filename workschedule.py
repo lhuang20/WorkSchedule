@@ -15,9 +15,9 @@ def get_work_status(month: int, day: int) -> str:
             if (base + 5) <= n <= (base + 6):
                 return "No work"
             elif n == (base + 4):
-                return "No work (Night shift yesterday)"
+                return "No work (Night shift before)"
             elif n == (base + 7):
-                return "No work (Day shift tomorrow)"
+                return "No work (Day shift next)"
             base = base + threshold + 5
     if n < 175:
         base = 174 # June 24, 2023 = Work day
@@ -41,14 +41,25 @@ def convert_date_to_n(month: int, day: int) -> int:
             n += 1
                        
     return sum(acc) + day
-            
+
+# Error checking function for month and date ranges
+def is_month_error(m: int) -> bool:
+  return m > 12 or m < 1
+
+# Error checking function for month and date ranges
+def is_day_error(d: int) -> bool:
+  return d > 31 or d < 1
+
 # frontend function
 while True:
-    month_input = int(input("Enter a month: "))
-    day_input = int(input("Enter a day: "))
-    output = get_work_status(month_input, day_input)
-    
-    print(output)
+    month_input = int(input("Enter a month (number only): "))
+    day_input = int(input("Enter a day (number only): "))
+    if is_month_error(month_input):
+      print("Month out of bounds")
+    elif is_day_error(day_input):
+      print("Day out of bounds")
+    elif is_month_error(month_input) == False and is_day_error(day_input) == False:
+      print(get_work_status(month_input, day_input))
 
 
 # tests for convert_date_to_n        
@@ -69,3 +80,21 @@ while True:
 # print(get_work_status(6, 18))
 
 # print(get_work_status(6, 30))
+
+# tests for error checking functions
+# print(is_month_error(1000))
+# print(is_month_error(11))
+# print(is_month_error(12))
+# print(is_month_error(13))
+# print(is_month_error(-1))
+# print(is_month_error(0))
+# print(is_month_error(1))
+
+# print(is_day_error(1000))
+# print(is_day_error(30))
+# print(is_day_error(31))
+# print(is_day_error(29))
+# print(is_day_error(32))
+# print(is_day_error(-1))
+# print(is_day_error(0))
+# print(is_day_error(1))
