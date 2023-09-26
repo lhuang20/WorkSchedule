@@ -6,11 +6,11 @@ def get_work_status(month: int, day: int) -> str:
         base = 175 # June 24, 2023 = Work day
         threshold = 3
         while True:
-            if base <= n <= (base + 1):
+            if base <= n < (base + 1):
                 return "Day"
-            elif (base + 1) <= n <= (base + 2):
-                return "Night (Swing)"
-            elif (base + 1) <= n <= (base + 3):
+            elif (base + 1) <= n < (base + 2):
+                return "Day (Swing)"
+            elif (base + 1) < n <= (base + 3):
                 return "Night"                  
             if (base + 5) <= n <= (base + 6):
                 return "No work"
